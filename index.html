@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ใบวางบิล - หจก. เชียงใหม่ 63 การช่าง</title>
+    
+    <!-- 🧬 BODHI-PANYA ENGINE v9.0: DNA CORE BLOCK -->
+    <meta name="engine-dna" content="Bodhi-Panya v9.0 Birthday & iPhone Genesis Edition">
+    <meta name="author" content="ช่างเบิร์ด (Chang Bird)">
+    <meta name="developer-email" content="bird.narin1985@gmail.com">
+    <meta name="mantra" content="สัมปติจฉามิ">
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        body { font-family: 'Sarabun', sans-serif; background-color: #e2e8f0; color: #1e293b; }
+        
+        /* กำหนดขนาดหน้ากระดาษ A4 แท้จริง สำหรับการพิมพ์ */
+        @page {
+            size: A4;
+            margin: 0;
+        }
+
+        .a4-page {
+            width: 210mm;
+            height: 297mm;
+            margin: 0 auto;
+            background: white;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            padding: 15mm 20mm;
+            box-sizing: border-box;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        @media print {
+            body { background: white !important; }
+            .no-print { display: none !important; }
+            .a4-page { box-shadow: none !important; margin: 0 !important; width: 100% !important; height: 100vh !important; padding: 10mm 15mm !important; }
+        }
+    </style>
+
+    <script>
+        console.log("🎂 [Bodhi-Panya v9.0 DNA Loaded]: Magazine Golden Ratio Edition");
+        console.log("✨ [Mantra]: สัมปติจฉามิ - สว่างไสว ปลอดภัย สำเร็จทุกประการ");
+
+        function showBodhiPanyaDNA() {
+            alert(`🎂 Bodhi-Panya Engine v9.0 DNA Core:\n\n` +
+                  `📱 พัฒนาด้วย iPhone เพียงเครื่องเดียว 2 คืน 3 วัน\n` +
+                  `👨‍💻 ผู้สร้าง: ช่างเบิร์ด (Chang Bird)\n` +
+                  `✉️ ติดต่อ: bird.narin1985@gmail.com\n` +
+                  `🙏 สัมปติจฉามิ... ขอให้ผลงานสำเร็จลุล่วงด้วยดี!`);
+        }
+    </script>
+</head>
+<body class="py-8">
+
+    <!-- แผงควบคุมสำหรับกรอกข้อมูล (ซ่อนตอนกดพิมพ์) -->
+    <div class="no-print max-w-2xl mx-auto bg-white rounded-2xl shadow-xl p-6 mb-8 space-y-4">
+        <div class="flex justify-between items-center border-b pb-4">
+            <div>
+                <h2 class="font-bold text-lg text-slate-900">🛠️ ระบบกรอกข้อมูลใบวางบิล</h2>
+                <p class="text-xs text-slate-500">เชียงใหม่ 63 การช่าง (Powered by Bodhi-Panya v9.0)</p>
+            </div>
+            <button onclick="showBodhiPanyaDNA()" class="bg-amber-500 hover:bg-amber-400 text-slate-900 text-xs font-bold px-3 py-2 rounded-lg shadow transition">
+                🧬 Bodhi-Panya v9.0
+            </button>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
+            <div>
+                <label class="block font-semibold text-slate-700 mb-1">บริษัทลูกค้า:</label>
+                <select id="inputClient" class="w-full border rounded-lg p-2 focus:ring-2 focus:ring-slate-800 focus:outline-none">
+                    <option value="บริษัท เอแพค จำกัด (สำนักงานใหญ่)">บริษัท เอแพค จำกัด</option>
+                    <option value="บริษัท นอร์ทเทิร์นเดเวลอปเมนท์ จำกัด">บริษัท นอร์ทเทิร์นเดเวลอปเมนท์ จำกัด</option>
+                    <option value="บริษัท ล้านนาพรอพเพอร์ตี้ จำกัด">บริษัท ล้านนาพรอพเพอร์ตี้ จำกัด</option>
+                </select>
+            </div>
+            <div>
+                <label class="block font-semibold text-slate-700 mb-1">เลขประจำตัวผู้เสียภาษีลูกค้า:</label>
+                <input type="text" id="inputTaxId" value="050555xxxxxxx" class="w-full border rounded-lg p-2 focus:ring-2 focus:ring-slate-800 focus:outline-none">
+            </div>
+            <div>
+                <label class="block font-semibold text-slate-700 mb-1">วันที่ออกเอกสาร:</label>
+                <input type="date" id="inputDate" class="w-full border rounded-lg p-2 focus:ring-2 focus:ring-slate-800 focus:outline-none">
+            </div>
+            <div>
+                <label class="block font-semibold text-slate-700 mb-1">วันครบกำหนดชำระ:</label>
+                <input type="date" id="inputDueDate" class="w-full border rounded-lg p-2 focus:ring-2 focus:ring-slate-800 focus:outline-none">
+            </div>
+            <div class="md:col-span-2">
+                <label class="block font-semibold text-slate-700 mb-1">รายการบริการ / งานก่อสร้าง:</label>
+                <input type="text" id="inputItem" value="ค่าบริการดูแลรักษาและซ่อมแซมโครงสร้างประจำรอบเดือน" class="w-full border rounded-lg p-2 focus:ring-2 focus:ring-slate-800 focus:outline-none">
+            </div>
+            <div>
+                <label class="block font-semibold text-slate-700 mb-1">จำนวนเงิน (บาท):</label>
+                <input type="number" id="inputAmount" value="15000" class="w-full border rounded-lg p-2 focus:ring-2 focus:ring-slate-800 focus:outline-none">
+            </div>
+        </div>
+
+        <button onclick="updateDocument()" class="w-full bg-slate-900 hover:bg-black text-white font-bold py-3 rounded-xl transition shadow-md">
+            ✨ อัปเดตฟอร์มเอกสาร (สัมปติจฉามิ)
+        </button>
+    </div>
+
+    <!-- 📄 กระดาษ A4 สไตล์นิตยสาร (Golden Ratio Layout) -->
+    <div class="a4-page">
+        
+        <!-- ส่วนหัว: Magazine Header Style -->
+        <div>
+            <div class="flex justify-between items-start border-b-2 border-slate-900 pb-5">
+                <div>
+                    <span class="text-xs font-bold tracking-widest text-amber-600 uppercase">Official Billing Document</span>
+                    <h1 class="text-2xl font-bold text-slate-900 tracking-tight mt-0.5">ห้างหุ้นส่วนจำกัด เชียงใหม่ 63 การช่าง</h1>
+                    <p class="text-xs text-slate-500 mt-1 leading-relaxed">
+                        เลขประจำตัวผู้เสียภาษี: 05035xxxxxxxx | จังหวัดเชียงใหม่<br>
+                        โทร: 0xx-xxxxxxx | E-mail: contact@chiangmai63.com
+                    </p>
+                </div>
+                <div class="text-right">
+                    <div class="bg-slate-900 text-white px-4 py-1.5 rounded-md inline-block">
+                        <h2 class="text-sm font-extrabold tracking-wider uppercase">ใบวางบิล</h2>
+                    </div>
+                    <p class="text-[10px] text-slate-400 mt-1 uppercase tracking-widest">Billing Note</p>
+                </div>
+            </div>
+
+            <!-- ข้อมูลลูกค้า & รายละเอียด (Golden Ratio Split Grid) -->
+            <div class="grid grid-cols-12 gap-4 mt-6 text-xs">
+                <!-- ฝั่งลูกค้า (佔 7 ส่วน) -->
+                <div class="col-span-7 bg-slate-50 p-4 rounded-xl border border-slate-200 space-y-1.5">
+                    <span class="text-[10px] font-bold uppercase tracking-wider text-slate-400">Client Details / นามลูกค้า</span>
+                    <p id="viewClient" class="text-sm font-bold text-slate-900">บริษัท เอแพค จำกัด (สำนักงานใหญ่)</p>
+                    <p class="text-slate-600">เลขประจำตัวผู้เสียภาษี: <span id="viewTaxId">050555xxxxxxx</span></p>
+                </div>
+                <!-- ฝั่งวันที่ (佔 5 ส่วน) -->
+                <div class="col-span-5 bg-slate-50 p-4 rounded-xl border border-slate-200 flex flex-col justify-between">
+                    <div class="flex justify-between">
+                        <span class="text-slate-500 font-medium">วันที่ออกเอกสาร:</span>
+                        <span id="viewDate" class="font-bold text-slate-900">2026-09-27</span>
+                    </div>
+                    <div class="flex justify-between border-t border-slate-200 pt-1.5 mt-1.5">
+                        <span class="text-slate-500 font-medium">ครบกำหนดชำระ:</span>
+                        <span id="viewDueDate" class="font-bold text-rose-600">2026-10-27</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ส่วนกลาง: ตารางรายการ (Magazine Minimalist Table) -->
+        <div class="my-6">
+            <table class="w-full text-xs">
+                <thead>
+                    <tr class="border-b-2 border-slate-900 text-slate-900 font-bold">
+                        <th class="py-3 px-2 text-center w-12">ลำดับ</th>
+                        <th class="py-3 px-4 text-left">รายการรายละเอียดการให้บริการ / งานก่อสร้าง</th>
+                        <th class="py-3 px-4 text-right w-36">จำนวนเงิน (บาท)</th>
+                    </tr>
+                </thead>
+                <tbody class="divide-y divide-slate-200">
+                    <tr>
+                        <td class="py-4 px-2 text-center text-slate-500 font-medium">01</td>
+                        <td id="viewItem" class="py-4 px-4 text-slate-800 font-medium">ค่าบริการดูแลรักษาและซ่อมแซมโครงสร้างประจำรอบเดือน</td>
+                        <td id="viewAmount" class="py-4 px-4 text-right font-bold text-slate-900">15,000.00</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- ส่วนล่าง: สรุปยอดและลายเซ็น -->
+        <div class="space-y-8">
+            <!-- ตารางสรุปยอดเงิน -->
+            <div class="flex justify-end">
+                <div class="w-64 space-y-2 text-xs bg-slate-50 p-4 rounded-xl border border-slate-200">
+                    <div class="flex justify-between text-slate-600">
+                        <span>รวมเป็นเงิน (Subtotal):</span>
+                        <span id="viewSubTotal">15,000.00</span>
+                    </div>
+                    <div class="flex justify-between text-slate-600">
+                        <span>ภาษีมูลค่าเพิ่ม (VAT 7%):</span>
+                        <span>0.00</span>
+                    </div>
+                    <div class="flex justify-between text-sm font-bold text-slate-900 border-t border-slate-300 pt-2">
+                        <span>ยอดรวมทั้งสิ้น:</span>
+                        <span id="viewTotal" class="text-blue-900">15,000.00 บาท</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ช่องลงลายมือชื่อ -->
+            <div class="grid grid-cols-2 gap-12 pt-4 text-center text-xs border-t border-slate-200">
+                <div class="space-y-8">
+                    <p class="text-slate-500 font-medium">ผู้วางบิล / ผู้ส่งมอบเอกสาร</p>
+                    <div class="border-b border-dashed border-slate-300 w-44 mx-auto"></div>
+                    <p class="text-slate-400">( นาริน อินชัย / ผู้มีอำนาจลงนาม )</p>
+                    <p class="text-[10px] text-slate-400">วันที่: _____/_____/_____</p>
+                </div>
+                <div class="space-y-8">
+                    <p class="text-slate-500 font-medium">ผู้รับวางบิล / ผู้ตรวจสอบ</p>
+                    <div class="border-b border-dashed border-slate-300 w-44 mx-auto"></div>
+                    <p class="text-slate-400">( ............................................................ )</p>
+                    <p class="text-[10px] text-slate-400">วันที่: _____/_____/_____</p>
+                </div>
+            </div>
+
+            <!-- Footer เล็กๆ ด้านล่างสุดของหน้า A4 -->
+            <div class="flex justify-between items-center text-[9px] text-slate-400 pt-2 border-t border-slate-100">
+                <span>หจก. เชียงใหม่ 63 การช่าง — ระบบจัดการเอกสารอัตโนมัติ</span>
+                <span>หน้า 1 จาก 1 (Powered by Bodhi-Panya v9.0)</span>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- ปุ่มสั่งพิมพ์ลอยตัวด้านล่าง (ซ่อนตอนพิมพ์) -->
+    <div class="no-print max-w-2xl mx-auto mt-6 text-center">
+        <button onclick="window.print()" class="bg-blue-600 hover:bg-blue-700 text-white font-bold px-8 py-3.5 rounded-xl shadow-lg transition text-sm">
+            🖨️ พิมพ์เอกสาร A4 / บันทึกเป็น PDF
+        </button>
+    </div>
+
+    <script>
+        // เซ็ตวันที่เริ่มต้นเป็นปัจจุบัน
+        document.getElementById('inputDate').valueAsDate = new Date();
+        let dueDate = new Date();
+        dueDate.setDate(dueDate.getDate() + 30);
+        document.getElementById('inputDueDate').valueAsDate = dueDate;
+
+        function updateDocument() {
+            const client = document.getElementById('inputClient').value;
+            const taxId = document.getElementById('inputTaxId').value;
+            const date = document.getElementById('inputDate').value;
+            const dueDateVal = document.getElementById('inputDueDate').value;
+            const item = document.getElementById('inputItem').value;
+            const rawAmount = parseFloat(document.getElementById('inputAmount').value) || 0;
+
+            const formattedAmount = rawAmount.toLocaleString('th-TH', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+
+            document.getElementById('viewClient').innerText = client;
+            document.getElementById('viewTaxId').innerText = taxId;
+            document.getElementById('viewDate').innerText = date;
+            document.getElementById('viewDueDate').innerText = dueDateVal;
+            document.getElementById('viewItem').innerText = item;
+            document.getElementById('viewAmount').innerText = formattedAmount;
+            document.getElementById('viewSubTotal').innerText = formattedAmount;
+            document.getElementById('viewTotal').innerText = formattedAmount + ' บาท';
+
+            window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
+            console.log("🙏 สัมปติจฉามิ... อัปเดตฟอร์ม A4 สไตล์นิตยสารเรียบร้อย");
+        }
+    </script>
+</body>
+</html>
