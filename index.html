@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ระบบออกใบวางบิล & ใบเสร็จรับเงิน - หจก. เชียงใหม่ 63 การช่าง</title>
+    
+    <!-- 🧬 BODHI-PANYA ENGINE v9.0: BILLING & RECEIPT EDITION -->
+    <meta name="engine-dna" content="Bodhi-Panya v9.0 Multi-Theme Document Edition">
+    <meta name="author" content="ช่างเบิร์ด (Chang Bird)">
+    <meta name="developer-email" content="bird.narin1985@gmail.com">
+    <meta name="mantra" content="สัมปติจฉามิ">
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        body { font-family: 'Sarabun', sans-serif; background-color: #cbd5e1; color: #1e293b; }
+        @page { size: A4; margin: 0; }
+
+        .a4-page {
+            width: 210mm;
+            height: 297mm;
+            margin: 0 auto;
+            background: white;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.15);
+            padding: 15mm 20mm;
+            box-sizing: border-box;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            transition: all 0.3s ease;
+        }
+
+        @media print {
+            body { background: white !important; }
+            .no-print { display: none !important; }
+            .a4-page { box-shadow: none !important; margin: 0 !important; width: 100% !important; height: 100vh !important; }
+        }
+
+        /* ธีมที่ 1: Classic Executive */
+        .theme-1 .doc-header { border-bottom: 4px solid #1e3a8a; }
+        .theme-1 .doc-badge { background-color: #1e3a8a; color: white; }
+        .theme-1 .doc-table th { background-color: #1e3a8a; color: white; }
+        .theme-1 .doc-accent { color: #1e3a8a; }
+
+        /* ธีมที่ 2: Modern Corporate */
+        .theme-2 .doc-header { border-bottom: 2px solid #0f172a; }
+        .theme-2 .doc-badge { background-color: #0f172a; color: white; }
+        .theme-2 .doc-table th { border-bottom: 2px solid #0f172a; color: #0f172a; }
+        .theme-2 .doc-accent { color: #0f172a; }
+
+        /* ธีมที่ 3: Warm Trust */
+        .theme-3 .doc-header { border-bottom: 2px solid #b45309; }
+        .theme-3 .doc-badge { background-color: #fef3c7; color: #b45309; border: 1px solid #fde68a; }
+        .theme-3 .doc-table th { background-color: #b45309; color: white; }
+        .theme-3 .doc-accent { color: #b45309; }
+
+        /* ธีมที่ 4: Tech Minimalist */
+        .theme-4 .doc-header { border-bottom: 1px solid #cbd5e1; }
+        .theme-4 .doc-badge { background-color: #ecfdf5; color: #047857; }
+        .theme-4 .doc-table th { border-bottom: 1px solid #0f172a; color: #0f172a; }
+        .theme-4 .doc-accent { color: #047857; }
+    </style>
+
+    <script>
+        console.log("🎂 [Bodhi-Panya v9.0]: Billing & Receipt System Loaded!");
+        function showBodhiPanyaDNA() {
+            alert(`🎂 Bodhi-Panya Engine v9.0 DNA Core:\n\n` +
+                  `📱 พัฒนาด้วย iPhone เพียงเครื่องเดียว 2 คืน 3 วัน\n` +
+                  `👨‍💻 ผู้สร้าง: ช่างเบิร์ด (Chang Bird)\n` +
+                  `✉️ ติดต่อ: bird.narin1985@gmail.com\n` +
+                  `🙏 สัมปติจฉามิ... ขอให้ธุรกิจสำเร็จทุกประการ!`);
+        }
+    </script>
+</head>
+<body class="py-8">
+
+    <!-- แผงควบคุม (ซ่อนตอนพิมพ์) -->
+    <div class="no-print max-w-2xl mx-auto bg-white rounded-2xl shadow-xl p-6 mb-8 space-y-4">
+        <div class="flex justify-between items-center border-b pb-4">
+            <div>
+                <h2 class="font-bold text-lg text-slate-900">🛠️ ออกใบวางบิล / ใบเสร็จรับเงิน</h2>
+                <p class="text-xs text-slate-500">เชียงใหม่ 63 การช่าง (Powered by Bodhi-Panya v9.0)</p>
+            </div>
+            <button onclick="showBodhiPanyaDNA()" class="bg-amber-500 hover:bg-amber-400 text-slate-900 text-xs font-bold px-3 py-2 rounded-lg shadow transition">
+                🧬 Bodhi-Panya v9.0
+            </button>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
+            <div>
+                <label class="block font-semibold text-slate-700 mb-1">📄 ประเภทเอกสาร:</label>
+                <select id="selectDocType" onchange="updatePreview()" class="w-full border rounded-lg p-2.5 font-semibold bg-slate-50 focus:ring-2 focus:ring-slate-800">
+                    <option value="ใบวางบิล">ใบวางบิล (Billing Note)</option>
+                    <option value="ใบเสร็จรับเงิน">ใบเสร็จรับเงิน / ใบกำกับภาษี (Receipt / Tax Invoice)</option>
+                </select>
+            </div>
+            <div>
+                <label class="block font-semibold text-slate-700 mb-1">🎯 เลือกธีมเอกสาร:</label>
+                <select id="selectTheme" onchange="changeTheme()" class="w-full border rounded-lg p-2.5 font-semibold bg-slate-50 focus:ring-2 focus:ring-slate-800">
+                    <option value="1">ธีมที่ 1: Classic Executive (ทางการ / ผู้ใหญ่)</option>
+                    <option value="2">ธีมที่ 2: Modern Corporate (โมเดิร์น เรียบหรู)</option>
+                    <option value="3">ธีมที่ 3: Warm Trust (อบอุ่น เป็นกันเอง)</option>
+                    <option value="4">ธีมที่ 4: Tech Minimalist (วัยรุ่น คลีน)</option>
+                </select>
+            </div>
+            <div>
+                <label class="block font-semibold text-slate-700 mb-1">บริษัทลูกค้า:</label>
+                <input type="text" id="inputClient" value="บริษัท เอแพค จำกัด (สำนักงานใหญ่)" class="w-full border rounded-lg p-2.5 focus:ring-2 focus:ring-slate-800">
+            </div>
+            <div>
+                <label class="block font-semibold text-slate-700 mb-1">เลขประจำตัวผู้เสียภาษีลูกค้า:</label>
+                <input type="text" id="inputTaxId" value="050555xxxxxxx" class="w-full border rounded-lg p-2.5 focus:ring-2 focus:ring-slate-800">
+            </div>
+            <div>
+                <label class="block font-semibold text-slate-700 mb-1">จำนวนเงิน (บาท):</label>
+                <input type="number" id="inputAmount" value="15000" class="w-full border rounded-lg p-2.5 focus:ring-2 focus:ring-slate-800">
+            </div>
+            <div>
+                <label class="block font-semibold text-slate-700 mb-1">รูปแบบการชำระเงิน:</label>
+                <select id="inputPayment" class="w-full border rounded-lg p-2.5 focus:ring-2 focus:ring-slate-800">
+                    <option value="เงินสด / Cash">เงินสด (Cash)</option>
+                    <option value="โอนเข้าบัญชีธนาคาร / Bank Transfer" selected>โอนเข้าบัญชีธนาคาร (Transfer)</option>
+                    <option value="เช็คธนาคาร / Cheque">เช็คธนาคาร (Cheque)</option>
+                </select>
+            </div>
+            <div class="md:col-span-2">
+                <label class="block font-semibold text-slate-700 mb-1">รายการบริการ:</label>
+                <input type="text" id="inputItem" value="ค่าบริการดูแลรักษาและซ่อมแซมโครงสร้างประจำรอบเดือน" class="w-full border rounded-lg p-2.5 focus:ring-2 focus:ring-slate-800">
+            </div>
+        </div>
+
+        <div class="flex gap-3 pt-2">
+            <button onclick="updatePreview()" class="flex-1 bg-slate-900 hover:bg-black text-white font-bold py-3 rounded-xl transition shadow">
+                ✨ อัปเดตข้อมูลเอกสาร (สัมปติจฉามิ)
+            </button>
+            <button onclick="window.print()" class="bg-blue-600 hover:bg-blue-700 text-white font-bold px-6 py-3 rounded-xl transition shadow">
+                🖨️ พิมพ์ A4
+            </button>
+        </div>
+    </div>
+
+    <!-- 📄 หน้ากระดาษ A4 (สลับเอกสารและธีมได้อัตโนมัติ) -->
+    <div id="a4Container" class="a4-page theme-1">
+        
+        <!-- ส่วนหัวเอกสาร -->
+        <div>
+            <div class="doc-header flex justify-between items-start pb-4">
+                <div>
+                    <span id="subHeaderBrand" class="text-[10px] font-bold tracking-widest uppercase text-slate-400">Official Accounting Document</span>
+                    <h1 class="text-2xl font-bold text-slate-900 tracking-tight mt-0.5">ห้างหุ้นส่วนจำกัด เชียงใหม่ 63 การช่าง</h1>
+                    <p class="text-xs text-slate-500 mt-1 leading-relaxed">
+                        เลขประจำตัวผู้เสียภาษี: 05035xxxxxxxx | จังหวัดเชียงใหม่<br>
+                        โทร: 0xx-xxxxxxx | E-mail: contact@chiangmai63.com
+                    </p>
+                </div>
+                <div class="text-right">
+                    <div class="doc-badge px-4 py-2 rounded-lg inline-block text-center shadow-sm">
+                        <h2 id="viewDocTitle" class="text-sm font-extrabold tracking-wider uppercase">ใบวางบิล</h2>
+                        <p id="viewDocSubTitle" class="text-[9px] opacity-80 uppercase">BILLING NOTE</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ข้อมูลลูกค้า & วันที่ -->
+            <div class="grid grid-cols-12 gap-4 mt-5 text-xs">
+                <div class="col-span-7 bg-slate-50 p-3.5 rounded-xl border border-slate-200 space-y-1">
+                    <span class="text-[10px] font-bold uppercase tracking-wider text-slate-400">Client Details / นามลูกค้า</span>
+                    <p id="viewClient" class="text-sm font-bold text-slate-900">บริษัท เอแพค จำกัด (สำนักงานใหญ่)</p>
+                    <p class="text-slate-600">เลขประจำตัวผู้เสียภาษี: <span id="viewTaxId">050555xxxxxxx</span></p>
+                </div>
+                <div class="col-span-5 bg-slate-50 p-3.5 rounded-xl border border-slate-200 flex flex-col justify-between">
+                    <div class="flex justify-between">
+                        <span class="text-slate-500 font-medium">วันที่ออกเอกสาร:</span>
+                        <span id="viewDate" class="font-bold text-slate-900">27/09/2026</span>
+                    </div>
+                    <div class="flex justify-between border-t border-slate-200 pt-1 mt-1">
+                        <span class="text-slate-500 font-medium" id="dueDateLabel">ครบกำหนดชำระ:</span>
+                        <span id="viewDueDate" class="font-bold text-rose-600">27/10/2026</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ตารางรายการ -->
+        <div class="my-4">
+            <table class="doc-table w-full text-xs border-collapse">
+                <thead>
+                    <tr>
+                        <th class="py-2.5 px-2 text-center w-12 border">ลำดับ</th>
+                        <th class="py-2.5 px-4 text-left border">รายการรายละเอียดการให้บริการ / งานก่อสร้าง</th>
+                        <th class="py-2.5 px-4 text-right w-36 border">จำนวนเงิน (บาท)</th>
+                    </tr>
+                </thead>
+                <tbody class="divide-y divide-slate-200">
+                    <tr>
+                        <td class="py-4 px-2 text-center text-slate-500 font-medium border">1</td>
+                        <td id="viewItem" class="py-4 px-4 text-slate-800 font-medium border">ค่าบริการดูแลรักษาและซ่อมแซมโครงสร้างประจำรอบเดือน</td>
+                        <td id="viewAmount" class="py-4 px-4 text-right font-bold text-slate-900 border">15,000.00</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- ส่วนล่าง: สรุปยอดและการชำระเงิน -->
+        <div class="space-y-6">
+            <!-- ส่วนแสดงการชำระเงิน (เฉพาะใบเสร็จ) หรือยอดรวม -->
+            <div class="flex justify-between items-end">
+                <div id="paymentBox" class="text-xs text-slate-600 space-y-1 bg-slate-50 p-3 rounded-lg border border-slate-200 w-1/2 hidden">
+                    <p class="font-bold text-slate-800">ช่องทางการชำระเงิน:</p>
+                    <p>• ชำระโดย: <span id="viewPaymentMethod" class="font-semibold text-slate-900">โอนเข้าบัญชีธนาคาร</span></p>
+                    <p>• สถานะ: <span class="text-emerald-700 font-bold">ชำระเงินเรียบร้อยแล้ว (Paid)</span></p>
+                </div>
+                <div class="w-64 space-y-1.5 text-xs bg-slate-50 p-3.5 rounded-xl border border-slate-200 ml-auto">
+                    <div class="flex justify-between text-slate-600">
+                        <span>รวมเป็นเงิน:</span>
+                        <span id="viewSubTotal">15,000.00</span>
+                    </div>
+                    <div class="flex justify-between text-slate-600">
+                        <span>ภาษีมูลค่าเพิ่ม (VAT 7%):</span>
+                        <span>0.00</span>
+                    </div>
+                    <div class="flex justify-between text-sm font-bold border-t border-slate-300 pt-1.5">
+                        <span>ยอดรวมทั้งสิ้น:</span>
+                        <span id="viewTotal" class="doc-accent">15,000.00 บาท</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ลายเซ็น -->
+            <div class="grid grid-cols-2 gap-12 pt-3 text-center text-xs border-t border-slate-200">
+                <div class="space-y-6">
+                    <p id="signLeftTitle" class="text-slate-500 font-medium">ผู้วางบิล / ผู้ส่งมอบเอกสาร</p>
+                    <div class="border-b border-dashed border-slate-300 w-40 mx-auto"></div>
+                    <p class="text-slate-400">( นาริน อินชัย / ประธานกรรมการ )</p>
+                    <p class="text-[10px] text-slate-400">วันที่: _____/_____/_____</p>
+                </div>
+                <div class="space-y-6">
+                    <p id="signRightTitle" class="text-slate-500 font-medium">ผู้รับวางบิล / ผู้ตรวจสอบ</p>
+                    <div class="border-b border-dashed border-slate-300 w-40 mx-auto"></div>
+                    <p class="text-slate-400">( .................................................... )</p>
+                    <p class="text-[10px] text-slate-400">วันที่: _____/_____/_____</p>
+                </div>
+            </div>
+
+            <!-- Footer -->
+            <div class="flex justify-between items-center text-[9px] text-slate-400 pt-2 border-t border-slate-100">
+                <span>หจก. เชียงใหม่ 63 การช่าง — ระบบจัดการเอกสารอัตโนมัติ</span>
+                <span>หน้า 1 จาก 1 (Powered by Bodhi-Panya v9.0)</span>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        const today = new Date();
+        document.getElementById('viewDate').innerText = today.toLocaleDateString('th-TH');
+        let due = new Date();
+        due.setDate(due.getDate() + 30);
+        document.getElementById('viewDueDate').innerText = due.toLocaleDateString('th-TH');
+
+        function changeTheme() {
+            const themeVal = document.getElementById('selectTheme').value;
+            document.getElementById('a4Container').className = `a4-page theme-${themeVal}`;
+        }
+
+        function updatePreview() {
+            const docType = document.getElementById('selectDocType').value;
+            const client = document.getElementById('inputClient').value;
+            const taxId = document.getElementById('inputTaxId').value;
+            const item = document.getElementById('inputItem').value;
+            const paymentMethod = document.getElementById('inputPayment').value;
+            
+            let rawAmount = parseFloat(document.getElementById('inputAmount').value) || 0;
+            let formatted = rawAmount.toLocaleString('th-TH', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+
+            // สลับข้อความระหว่าง ใบวางบิล VS ใบเสร็จรับเงิน
+            if (docType === 'ใบวางบิล') {
+                document.getElementById('viewDocTitle').innerText = 'ใบวางบิล';
+                document.getElementById('viewDocSubTitle').innerText = 'BILLING NOTE';
+                document.getElementById('dueDateLabel').innerText = 'ครบกำหนดชำระ:';
+                document.getElementById('viewDueDate').innerText = due.toLocaleDateString('th-TH');
+                document.getElementById('viewDueDate').className = 'font-bold text-rose-600';
+                document.getElementById('paymentBox').classList.add('hidden');
+                document.getElementById('signLeftTitle').innerText = 'ผู้วางบิล / ผู้ส่งมอบเอกสาร';
+                document.getElementById('signRightTitle').innerText = 'ผู้รับวางบิล / ผู้ตรวจสอบ';
+            } else {
+                document.getElementById('viewDocTitle').innerText = 'ใบเสร็จรับเงิน';
+                document.getElementById('viewDocSubTitle').innerText = 'RECEIPT / TAX INVOICE';
+                document.getElementById('dueDateLabel').innerText = 'วันที่ชำระเงิน:';
+                document.getElementById('viewDueDate').innerText = today.toLocaleDateString('th-TH');
+                document.getElementById('viewDueDate').className = 'font-bold text-emerald-700';
+                document.getElementById('paymentBox').classList.remove('hidden');
+                document.getElementById('viewPaymentMethod').innerText = paymentMethod;
+                document.getElementById('signLeftTitle').innerText = 'ผู้รับเงิน / ผู้มีอำนาจลงนาม';
+                document.getElementById('signRightTitle').innerText = 'ผู้จ่ายเงิน / ลูกค้า';
+            }
+
+            document.getElementById('viewClient').innerText = client;
+            document.getElementById('viewTaxId').innerText = taxId;
+            document.getElementById('viewItem').innerText = item;
+            document.getElementById('viewAmount').innerText = formatted;
+            document.getElementById('viewSubTotal').innerText = formatted;
+            document.getElementById('viewTotal').innerText = formatted + ' บาท';
+
+            window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
+            console.log("🙏 สัมปติจฉามิ... อัปเดตข้อมูลเอกสารเรียบร้อย");
+        }
+    </script>
+</body>
+</html>
